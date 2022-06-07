@@ -1,64 +1,139 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+---
+title: la-starter v1.0.0
+language_tabs:
+  - shell: Shell
+  - http: HTTP
+  - javascript: JavaScript
+  - ruby: Ruby
+  - python: Python
+  - php: PHP
+  - java: Java
+  - go: Go
+toc_footers: []
+includes: []
+search: true
+code_clipboard: true
+highlight_theme: darkula
+headingLevel: 2
+generator: "@tarslib/widdershins v4.0.11"
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+---
 
-## About Laravel
+# 商盟中心
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+> v1.0.0
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# 用户相关
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## POST 用户退出
 
-## Learning Laravel
+POST /api/auth/logout
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+> Body 请求参数
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```yaml
+{}
 
-## Laravel Sponsors
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### 请求参数
 
-### Premium Partners
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|body|body|object| 否 |none|
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+> 返回示例
 
-## Contributing
+### 返回结果
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
 
-## Code of Conduct
+### 返回数据结构
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## GET 当前用户信息
 
-## Security Vulnerabilities
+GET /api/auth/user
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+> 返回示例
 
-## License
+### 返回结果
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+
+### 返回数据结构
+
+## GET 获取验证码
+
+GET /captcha/api/math
+
+获取验证码
+
+> 返回示例
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+
+### 返回数据结构
+
+状态码 **200**
+
+|名称|类型|必选|约束|中文名|说明|
+|---|---|---|---|---|---|
+|» sensitive|boolean|true|none||none|
+|» key|string|true|none||none|
+|» img|string|true|none||none|
+
+## POST 用户登录
+
+POST /api/auth/login
+
+用户登录
+
+> Body 请求参数
+
+```yaml
+username: string
+password: string
+captcha: string
+key: string
+
+```
+
+### 请求参数
+
+|名称|位置|类型|必选|说明|
+|---|---|---|---|---|
+|body|body|object| 否 |none|
+|» username|body|string| 是 |none|
+|» password|body|string| 是 |none|
+|» captcha|body|string| 是 |none|
+|» key|body|string| 是 |none|
+
+> 返回示例
+
+### 返回结果
+
+|状态码|状态码含义|说明|数据模型|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|成功|Inline|
+
+### 返回数据结构
+
+状态码 **200**
+
+|名称|类型|必选|约束|中文名|说明|
+|---|---|---|---|---|---|
+|» code|integer|true|none||none|
+|» msg|string|true|none||none|
+|» data|object|true|none||none|
+|»» token|string|true|none||none|
+
+# 数据模型
+
