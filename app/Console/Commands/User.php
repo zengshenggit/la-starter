@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\User as ModelsUser;
 use Illuminate\Console\Command;
+use Spatie\Permission\Models\Role;
 
 class User extends Command
 {
@@ -43,6 +44,8 @@ class User extends Command
             return $this->warn(sprintf('The user %s aready exists !', $email));
         }
         if (($user = ModelsUser::factory()->create())) {
+            Role::create(['name' => 'Super Admin']);
+            $user->assignRole('Super Admin');
             return $this->info(sprintf('The user %s created successfully !', $user->name));
         }
 
