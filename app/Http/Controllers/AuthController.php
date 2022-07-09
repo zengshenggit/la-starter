@@ -12,7 +12,7 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         $user = $request->user();
-        return response()->json(['code' => 0, 'msg' => '', 'data' => compact('user')]);
+        return response()->json(['code' => 0, 'msg' => '', 'data' => $user]);
     }
 
     public function login(Request $request)
