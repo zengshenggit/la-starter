@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +27,9 @@ Route::post('auth/login', [AuthController::class, 'login']);
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get('auth/user', [AuthController::class, 'user']);
     Route::post('auth/logout', [AuthController::class, 'logout']);
+    Route::apiResource('/users', UserController::class);
+    Route::apiResource('/roles', RoleController::class);
+    Route::apiResource('/permissions', PermissionController::class);
 });
 
 Route::get('menus', function() {
